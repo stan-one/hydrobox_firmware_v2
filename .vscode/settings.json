@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "adc_oneshot.h": "c",
+        "stdlib.h": "c"
+    }
+}

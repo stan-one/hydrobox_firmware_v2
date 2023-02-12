@@ -1,0 +1,1051 @@
+[
+    {
+        "id": "9071faf57908faaf",
+        "type": "tab",
+        "label": "Mainpage",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f4a021378268f80e",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "get_temp",
+        "func": "msg.payload = parseFloat(msg.payload.temp);\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 260,
+        "wires": [
+            [
+                "3022fe62e99f02ed"
+            ]
+        ]
+    },
+    {
+        "id": "69cf55029a01404e",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 630,
+        "y": 260,
+        "wires": [
+            [
+                "f4a021378268f80e",
+                "88d35508ea85a405",
+                "6e5e7eee98530c66",
+                "3661c030e9533b3f"
+            ]
+        ]
+    },
+    {
+        "id": "88d35508ea85a405",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "get_ph",
+        "func": "msg.payload = parseFloat(msg.payload.ph);\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 180,
+        "wires": [
+            [
+                "36ab518de25c66dd"
+            ]
+        ]
+    },
+    {
+        "id": "3022fe62e99f02ed",
+        "type": "ui_gauge",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "group": "306b7b60024c61b3",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "40",
+        "colors": [
+            "#c01c28",
+            "#52ff00",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1070,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "36ab518de25c66dd",
+        "type": "ui_gauge",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "group": "306b7b60024c61b3",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "pH",
+        "label": "",
+        "format": "{{value}}",
+        "min": "4",
+        "max": "7.5",
+        "colors": [
+            "#e01b24",
+            "#52ff00",
+            "#e01b24"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1050,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6e5e7eee98530c66",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "get_hum",
+        "func": "msg.payload = parseInt(msg.payload.hum);\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 340,
+        "wires": [
+            [
+                "d76994e3cc225d13"
+            ]
+        ]
+    },
+    {
+        "id": "d76994e3cc225d13",
+        "type": "ui_gauge",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "group": "306b7b60024c61b3",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": " relative %",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "100",
+        "colors": [
+            "#c01c28",
+            "#52ff00",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1060,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "dc8c7bfe15305243",
+        "type": "ui_switch",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "label": "FANs",
+        "tooltip": "",
+        "group": "306b7b60024c61b3",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "x": 690,
+        "y": 580,
+        "wires": [
+            [
+                "a996e8c6ec99db8b"
+            ]
+        ]
+    },
+    {
+        "id": "2037f9bd11dc26a9",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.4:8000/fan",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1250,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "da2640e70a6a20d0",
+        "type": "ui_switch",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "label": "Airpump",
+        "tooltip": "",
+        "group": "306b7b60024c61b3",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "x": 700,
+        "y": 640,
+        "wires": [
+            [
+                "b2a7e3b16fe9d6fc"
+            ]
+        ]
+    },
+    {
+        "id": "7a943ffdb94305cd",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.4:8000/airpump",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1250,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d7b233fb4a8d7dc",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.4:8000/leds",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1250,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "336de8aa0b4de3e9",
+        "type": "ui_slider",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "label": "LEDS",
+        "tooltip": "",
+        "group": "306b7b60024c61b3",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "100",
+        "step": 1,
+        "x": 690,
+        "y": 700,
+        "wires": [
+            [
+                "acd2794aa910c676"
+            ]
+        ]
+    },
+    {
+        "id": "bb46a6b8bcd9a540",
+        "type": "ui_text_input",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "label": "Light cycle",
+        "tooltip": "",
+        "group": "306b7b60024c61b3",
+        "order": 6,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 710,
+        "y": 760,
+        "wires": [
+            [
+                "088c879ba0e2c80f"
+            ]
+        ]
+    },
+    {
+        "id": "ca49188e619f4ae3",
+        "type": "ui_button",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "group": "306b7b60024c61b3",
+        "order": 7,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "Save",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 690,
+        "y": 820,
+        "wires": [
+            [
+                "550850192172f219"
+            ]
+        ]
+    },
+    {
+        "id": "e265ffe9fea1f9f9",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.4:8000/cycle",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1250,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "550850192172f219",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "load_global",
+        "func": "msg.payload={\n    \"cycle\": global.get(\"cycle\")\n} \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 820,
+        "wires": [
+            [
+                "6b9ad825bf940f84"
+            ]
+        ]
+    },
+    {
+        "id": "088c879ba0e2c80f",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "save_global",
+        "func": "global.set(\"cycle\", msg.payload);\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6b9ad825bf940f84",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1090,
+        "y": 820,
+        "wires": [
+            [
+                "e265ffe9fea1f9f9"
+            ]
+        ]
+    },
+    {
+        "id": "a996e8c6ec99db8b",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "set_fan",
+        "func": "msg.payload = {\n    \"fan\": msg.payload\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 580,
+        "wires": [
+            [
+                "590292d1f2414035"
+            ]
+        ]
+    },
+    {
+        "id": "590292d1f2414035",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1090,
+        "y": 580,
+        "wires": [
+            [
+                "2037f9bd11dc26a9"
+            ]
+        ]
+    },
+    {
+        "id": "b2a7e3b16fe9d6fc",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "set_airpump",
+        "func": "msg.payload = {\n    \"airpump\": msg.payload\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 640,
+        "wires": [
+            [
+                "23863e81f484b6b5"
+            ]
+        ]
+    },
+    {
+        "id": "23863e81f484b6b5",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1090,
+        "y": 640,
+        "wires": [
+            [
+                "7a943ffdb94305cd"
+            ]
+        ]
+    },
+    {
+        "id": "acd2794aa910c676",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "set_leds",
+        "func": "msg.payload = {\n    \"leds\": msg.payload\n}\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 700,
+        "wires": [
+            [
+                "1feb647ef080eb32"
+            ]
+        ]
+    },
+    {
+        "id": "1feb647ef080eb32",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1090,
+        "y": 700,
+        "wires": [
+            [
+                "2d7b233fb4a8d7dc"
+            ]
+        ]
+    },
+    {
+        "id": "71db6389bbe9d7ce",
+        "type": "ui_text",
+        "z": "9071faf57908faaf",
+        "group": "306b7b60024c61b3",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Uptime",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1060,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3661c030e9533b3f",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "get_uptime",
+        "func": "msg.payload = msg.payload.uptime+\"h\";\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 400,
+        "wires": [
+            [
+                "71db6389bbe9d7ce"
+            ]
+        ]
+    },
+    {
+        "id": "b993cc6832b45feb",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://hydrobox.local:8080",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 450,
+        "y": 260,
+        "wires": [
+            [
+                "69cf55029a01404e"
+            ]
+        ]
+    },
+    {
+        "id": "c552747fb1766c2e",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.4/prev",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Accept",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 190,
+        "y": 680,
+        "wires": [
+            [
+                "fa1c644d7497b66a"
+            ]
+        ]
+    },
+    {
+        "id": "fa1c644d7497b66a",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 350,
+        "y": 680,
+        "wires": [
+            [
+                "c52005d9f4e4d488",
+                "9625afcd1edab9c7",
+                "62fb5c1b92bc3c90",
+                "6abb273363e01fad"
+            ]
+        ]
+    },
+    {
+        "id": "c52005d9f4e4d488",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "set_fan",
+        "func": "msg.payload = parseInt(msg.payload.fan_state);\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 580,
+        "wires": [
+            [
+                "dc8c7bfe15305243"
+            ]
+        ]
+    },
+    {
+        "id": "9625afcd1edab9c7",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "set_airpump",
+        "func": "msg.payload = parseInt(msg.payload.airpump_state);\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 640,
+        "wires": [
+            [
+                "da2640e70a6a20d0"
+            ]
+        ]
+    },
+    {
+        "id": "62fb5c1b92bc3c90",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "set_led",
+        "func": "msg.payload = parseInt(msg.payload.led_state);\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 700,
+        "wires": [
+            [
+                "336de8aa0b4de3e9"
+            ]
+        ]
+    },
+    {
+        "id": "6abb273363e01fad",
+        "type": "function",
+        "z": "9071faf57908faaf",
+        "name": "set_cycle",
+        "func": "msg.payload = msg.payload.cycle_state\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 760,
+        "wires": [
+            [
+                "bb46a6b8bcd9a540"
+            ]
+        ]
+    },
+    {
+        "id": "1511af841ced451d",
+        "type": "ui_button",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "group": "306b7b60024c61b3",
+        "order": 10,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "pH 7 calib",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "7",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 600,
+        "y": 880,
+        "wires": [
+            [
+                "e630f2cf7bdb04b2"
+            ]
+        ]
+    },
+    {
+        "id": "33bbdfe44c728e55",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.4:8000/config_ph",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "credentials": {},
+        "x": 1170,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aac82496bd605545",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 950,
+        "y": 880,
+        "wires": [
+            [
+                "33bbdfe44c728e55"
+            ]
+        ]
+    },
+    {
+        "id": "e630f2cf7bdb04b2",
+        "type": "change",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"ph\":7}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 880,
+        "wires": [
+            [
+                "aac82496bd605545"
+            ]
+        ]
+    },
+    {
+        "id": "348603270e2eb2bd",
+        "type": "ui_button",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "group": "306b7b60024c61b3",
+        "order": 12,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "label": "pH 4 calib",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "4",
+        "payloadType": "num",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 600,
+        "y": 940,
+        "wires": [
+            [
+                "43d27bcfb983b347"
+            ]
+        ]
+    },
+    {
+        "id": "763b9750018bf850",
+        "type": "http request",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.4:8000/config_ph",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "credentials": {},
+        "x": 1170,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "266753bac1b4ae15",
+        "type": "json",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 950,
+        "y": 940,
+        "wires": [
+            [
+                "763b9750018bf850"
+            ]
+        ]
+    },
+    {
+        "id": "43d27bcfb983b347",
+        "type": "change",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"ph\":4}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 940,
+        "wires": [
+            [
+                "266753bac1b4ae15"
+            ]
+        ]
+    },
+    {
+        "id": "c0168c96ba9e3e8e",
+        "type": "inject",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "b993cc6832b45feb"
+            ]
+        ]
+    },
+    {
+        "id": "f9ac05833bece06d",
+        "type": "inject",
+        "z": "9071faf57908faaf",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 50,
+        "y": 680,
+        "wires": [
+            [
+                "c552747fb1766c2e"
+            ]
+        ]
+    },
+    {
+        "id": "4a6fde0057604dbd",
+        "type": "ui_spacer",
+        "z": "9071faf57908faaf",
+        "name": "spacer",
+        "group": "306b7b60024c61b3",
+        "order": 11,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "306b7b60024c61b3",
+        "type": "ui_group",
+        "name": "CURRENT STATE",
+        "tab": "61d5112a11d8c964",
+        "order": 1,
+        "disp": true,
+        "width": "7",
+        "collapse": false
+    },
+    {
+        "id": "61d5112a11d8c964",
+        "type": "ui_tab",
+        "name": "HYDROBOX CONTROL PANEL",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
